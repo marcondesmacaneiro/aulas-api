@@ -8,7 +8,13 @@ spring:
     show-sql: true
     generate-ddl: true
     properties:
-      hibernate.format_sql: false
+      hibernate.format_sql: true
+  datasource:
+    platform: postgresql
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/aulas-api
+    username: postgres
+    password: postgres      
   cache:
     cache-names: person
     guava:
