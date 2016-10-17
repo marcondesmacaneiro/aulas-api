@@ -1,4 +1,4 @@
-package br.com.marcondesmacaneiro.domain.model;
+package br.com.marcondesmacaneiro.domain.model.novo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -53,6 +53,15 @@ public class Municipio implements Serializable, Persistable<Long>, Identifiable<
     @Column(name = "uf", length = 2, insertable = true, updatable = true)
     @Size(min = 2, max = 2)
     private String uf;
+
+    @JsonIgnore
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdTime;
+
+    @JsonIgnore
+    @LastModifiedDate
+    private LocalDateTime updatedTime;
 
     private Municipio(int codigoIbge, String descricao, String uf) {
         this.codigoIbge = codigoIbge;

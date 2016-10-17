@@ -1,6 +1,6 @@
-package br.com.marcondesmacaneiro.domain.repository;
+package br.com.marcondesmacaneiro.domain.repository.novo;
 
-import br.com.marcondesmacaneiro.domain.model.Municipio;
+import br.com.marcondesmacaneiro.domain.model.novo.Municipio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;

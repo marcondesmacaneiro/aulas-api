@@ -3,6 +3,12 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 ---
 spring:
+  resources: 
+    chain: 
+      strategy: 
+        content: 
+          enabled: true
+          paths: /**
   profiles: dev
   jpa:
     show-sql: true
