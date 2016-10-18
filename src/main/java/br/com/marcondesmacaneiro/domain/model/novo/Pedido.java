@@ -1,8 +1,5 @@
 package br.com.marcondesmacaneiro.domain.model.novo;
 
-import br.com.marcondesmacaneiro.domain.model.novo.Produto;
-import java.io.Serializable;
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,10 +9,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import org.springframework.hateoas.core.Relation;
 
@@ -23,7 +19,7 @@ import org.springframework.hateoas.core.Relation;
  * Created by marcondesmacaneiro on 17/10/16.
  */
 @Entity
-@Table(name = "tb_pedido_cliente")
+@Table(name = "tb_pedido")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Relation(value = "pedido", collectionRelation = "pedidos")
@@ -31,7 +27,7 @@ import org.springframework.hateoas.core.Relation;
 @Setter
 @EqualsAndHashCode(of = "id")
 @ToString(of = {"id", "nome"})
-public class PedidoCliente implements Serializable, Persistable<Long>, Identifiable<Long> {
+public class Pedido implements Serializable, Persistable<Long>, Identifiable<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,18 +37,34 @@ public class PedidoCliente implements Serializable, Persistable<Long>, Identifia
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_pedido_id")
     private Long id;
 
+    @ManyToOne(optional = false)
     private Cliente cliente;
-    private Produto produto;
-    private int status;
-    private double quantidade;
-    private double precoVenda;
+    
+    @ManyToMany
+    @JoinTable(name = "tb_pedido_produto",
+            joinColumns = {
+                @JoinColumn(name = "pedido_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "produto_id")})
+    private List<Produto> produtos;
 
-    private PedidoCliente(Cliente cliente, Produto produto, int status, double quantidade, double precoVenda) {
+    
+    private int status;
+    private double valorTotal;
+
+    @JsonIgnore
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdTime;
+
+    @JsonIgnore
+    @LastModifiedDate
+    private LocalDateTime updatedTime;
+
+    private Pedido(Cliente cliente, int status, double quantidade, double valorTotal) {
         this.cliente = cliente;
-        this.produto = produto;
         this.status = status;
-        this.quantidade = quantidade;
-        this.precoVenda = precoVenda;
+        this.valorTotal = valorTotal;
     }
 
     @Override

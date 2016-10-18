@@ -1,6 +1,5 @@
 package br.com.marcondesmacaneiro.domain.model.novo;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,14 +38,46 @@ public class Funcionario implements Serializable, Persistable<Long>, Identifiabl
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_funcionario_id")
     private Long id;
 
+    @NotNull
+    @Column(length = 14, insertable = true, updatable = true)
+    @Size(min = 14, max = 14)
     private String cpf;
+    
+    @NotNull
+    @Column(length = 50, insertable = true, updatable = true)
+    @Size(min = 5, max = 50)
     private String nome;
+    
+    @Column(length = 100, insertable = true, updatable = true)
     private String endereco;
+    
+    @Column(length = 50, insertable = true, updatable = true)
     private String email;
+    
+    @Column(insertable = true, updatable = true)
     private boolean usuario;
+    
+    @NotNull
+    @Column(length = 20, insertable = true, updatable = true)
+    @Size(min = 8, max = 20)
     private String login;
+    
+    @NotNull
+    @Column(length = 100, insertable = true, updatable = true)
+    @Size(min = 20, max = 100)
     private String senha;
-    private String confirmaSenha;
+    
+    @Column(insertable = true, updatable = true)
+    private Boolean confirmaSenha;
+
+    @JsonIgnore
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdTime;
+
+    @JsonIgnore
+    @LastModifiedDate
+    private LocalDateTime updatedTime;
 
     private Funcionario(String cpf, String nome, String endereco, String email, boolean usuario) {
         this.cpf = cpf;

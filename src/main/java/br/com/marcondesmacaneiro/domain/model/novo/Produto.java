@@ -1,6 +1,5 @@
 package br.com.marcondesmacaneiro.domain.model.novo;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,6 +14,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import org.springframework.hateoas.core.Relation;
 
 /**
@@ -29,20 +30,42 @@ import org.springframework.hateoas.core.Relation;
 @Setter
 @EqualsAndHashCode(of = "id")
 @ToString(of = {"id", "nome"})
-public class Produto implements Serializable, Persistable<Long>, Identifiable<Long>  {
-    
+public class Produto implements Serializable, Persistable<Long>, Identifiable<Long> {
+
     private static final long serialVersionUID = 1L;
-       
+
     @Id
     @JsonIgnore
     @SequenceGenerator(name = "gen_produto_id", sequenceName = "seq_produto_id", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_produto_id")
     private Long id;
-    
+
+    @NotNull
+    @Column(length = 50, insertable = true, updatable = true)
+    @Size(min = 8, max = 50)
     private String descricao;
+
+    @NotNull
+    @Min(0)
+    @Max(10000)
     private double valorCusto;
+
+    @NotNull
+    @Column(insertable = true, updatable = true)
+    @Min(0)
     private int estoque;
+
+    @ManyToOne(optional = false)
     private Categoria categoria;
+
+    @JsonIgnore
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdTime;
+
+    @JsonIgnore
+    @LastModifiedDate
+    private LocalDateTime updatedTime;
 
     private Produto(int id, String descricao, double valorCusto, int estoque, Categoria categoria) {
         this.descricao = descricao;
@@ -55,5 +78,5 @@ public class Produto implements Serializable, Persistable<Long>, Identifiable<Lo
     public boolean isNew() {
         return Objects.isNull(id);
     }
-    
+
 }

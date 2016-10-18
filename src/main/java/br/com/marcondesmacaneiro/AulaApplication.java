@@ -1,13 +1,8 @@
 package br.com.marcondesmacaneiro;
 
-import java.util.Locale;
-import java.util.TimeZone;
-import javafx.application.Application;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
