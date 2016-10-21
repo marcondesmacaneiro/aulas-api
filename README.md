@@ -1,5 +1,11 @@
 # aulas-api-spring-boot
 
+https://spring.io/guides/gs/consuming-rest-android/
+
+http://square.github.io/retrofit/
+
+---------------------------------------------------------------------
+
 Primeira parte da Documentação
 
 Listando todos os dados do CENSO
