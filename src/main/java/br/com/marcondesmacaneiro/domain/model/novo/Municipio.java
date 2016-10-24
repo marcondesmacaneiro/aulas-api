@@ -42,11 +42,6 @@ public class Municipio implements Serializable, Persistable<Long>, Identifiable<
     @NotNull
     @Column(name = "codigo_ibge", length = 10, unique = true, updatable = true, insertable = true)
     private int codigoIbge;
-    
-    @NotNull
-    @Column(name = "nome", length = 10, unique = true, updatable = true, insertable = true)
-    @Size(min = 0, max = 50)
-    private String nome;
 
     @NotNull
     @Column(name = "descricao", length = 100, insertable = true, updatable = true)
@@ -57,11 +52,6 @@ public class Municipio implements Serializable, Persistable<Long>, Identifiable<
     @Column(name = "uf", length = 2, insertable = true, updatable = true)
     @Size(min = 2, max = 2)
     private String uf;
-
-    @NotNull
-    @Column(name = "cpf", length = 2, insertable = true, updatable = true)
-    @Size(min = 14, max = 14)
-    private String cpf;
 
     @JsonIgnore
     @CreatedDate
