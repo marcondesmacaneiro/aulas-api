@@ -23,7 +23,7 @@ import org.springframework.hateoas.core.Relation;
 @Table(name = "tb_funcionario")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Relation(value = "funcionario", collectionRelation = "funcionario")
+@Relation(value = "funcionario", collectionRelation = "funcionarios")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")

@@ -21,10 +21,10 @@ import org.springframework.hateoas.core.Relation;
  * Created by marcondesmacaneiro on 17/10/16.
  */
 @Entity
-@Table(name = "tb_municipio")
+@Table(name = "tb_cliente")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Relation(value = "municipio", collectionRelation = "municipios")
+@Relation(value = "cliente", collectionRelation = "clientes")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -35,8 +35,8 @@ public class Cliente implements Serializable, Persistable<Long>, Identifiable<Lo
 
     @Id
     @JsonIgnore
-    @SequenceGenerator(name = "gen_usuario_id", sequenceName = "seq_usuario_id", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_usuario_id")
+    @SequenceGenerator(name = "gen_cliente_id", sequenceName = "seq_cliente_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_cliente_id")
     private Long id;
 
     @NotNull
