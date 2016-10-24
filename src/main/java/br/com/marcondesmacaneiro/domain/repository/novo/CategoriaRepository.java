@@ -9,6 +9,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * Created by marcondesmacaneiro on 18/10/16.
  */
 @RepositoryRestResource(collectionResourceRel = "categorias", itemResourceRel = "categoria" , path = "categoria")
-@CrossOrigin
 interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 }

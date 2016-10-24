@@ -10,6 +10,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * Created by marcondesmacaneiro on 12/07/16.
  */
 @RepositoryRestResource(collectionResourceRel = "enderecos", itemResourceRel = "endereco" , path = "endereco")
-@CrossOrigin
 interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 }
