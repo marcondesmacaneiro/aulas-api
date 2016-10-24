@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+    active: ${SPRING_PROFILES_ACTIVE:cloud}
 ---
 spring:
   resources: 
@@ -21,6 +21,30 @@ spring:
     url: jdbc:postgresql://localhost:5432/aulas-api
     username: postgres
     password: postgres      
+  cache:
+    cache-names: person
+    guava:
+      spec: maximumSize=10,expireAfterAccess=60s
+---
+spring:
+  resources: 
+    chain: 
+      strategy: 
+        content: 
+          enabled: true
+          paths: /**
+  profiles: cloud
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate.format_sql: true
+  datasource:
+    platform: postgresql
+    driverClassName: org.postgresql.Driver
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}      
   cache:
     cache-names: person
     guava:
