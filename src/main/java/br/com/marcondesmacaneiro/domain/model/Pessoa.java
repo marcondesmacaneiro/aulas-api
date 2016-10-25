@@ -47,12 +47,12 @@ public class Pessoa implements Serializable, Persistable<Long>, Identifiable<Lon
     @Column(nullable = false, length = 100)
     private String name;
 
+    @NotNull
     @Email(message = "Invalid mail address!")
     @Size(min = 1, max = 100)
     @Column(length = 100)
     private String mail;
 
-    @NotNull
     @Column(nullable = false, unique = true, length = Phone.MAX_LENGHT)
     private Phone phone;
 
@@ -73,7 +73,7 @@ public class Pessoa implements Serializable, Persistable<Long>, Identifiable<Lon
     @LastModifiedDate
     private LocalDateTime updatedTime;
 
-    private Pessoa(String name, Phone phone) {
+    private Pessoa(String name, String mail, Phone phone) {
         this.name = name;
         this.phone = phone;
     }
@@ -90,7 +90,7 @@ public class Pessoa implements Serializable, Persistable<Long>, Identifiable<Lon
         return Objects.isNull(id);
     }
 
-    public static Pessoa of(String name, Phone phone) {
-        return new Pessoa(name, phone);
+    public static Pessoa of(String name, String mail, Phone phone) {
+        return new Pessoa(name, mail, phone);
     }
 }

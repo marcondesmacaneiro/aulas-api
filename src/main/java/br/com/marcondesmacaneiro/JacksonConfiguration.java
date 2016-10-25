@@ -18,7 +18,8 @@ import java.util.Set;
 public class JacksonConfiguration {
 
     @Autowired
-    private void registerSerializersDeserializers(List<ObjectMapper> objectMappers, Set<JsonSerializer> serializers, Set<JsonDeserializer> deserializers) {
+    private void registerSerializersDeserializers(List<ObjectMapper> objectMappers, 
+            Set<JsonSerializer> serializers, Set<JsonDeserializer> deserializers) {
         SimpleModule simpleModule = new SimpleModule();
 
         for (JsonSerializer serializer : serializers) {

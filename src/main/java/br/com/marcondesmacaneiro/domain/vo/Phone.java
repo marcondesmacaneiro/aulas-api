@@ -19,9 +19,9 @@ public class Phone implements Serializable, Comparable<Phone> {
     public static final int MAX_LENGHT = 20;
 
     private final String countryCode;
-    
+
     private final String areaCode;
-    
+
     private final String number;
 
     private Phone(String countryCode, String areaCode, String number) {
@@ -37,7 +37,7 @@ public class Phone implements Serializable, Comparable<Phone> {
         String country = digits.substring(0, 2);
         String areaCode = digits.substring(2, 4);
         String number = digits.substring(4);
-        return new Phone(country,areaCode,number);
+        return new Phone(country, areaCode, number);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Phone implements Serializable, Comparable<Phone> {
         } else if (obj instanceof Phone) {
             Phone other = (Phone) obj;
             return Objects.equal(countryCode, other.countryCode)
-                    && Objects.equal(areaCode, other.areaCode) 
+                    && Objects.equal(areaCode, other.areaCode)
                     && Objects.equal(number, other.number);
         }
         return false;
@@ -77,15 +77,15 @@ public class Phone implements Serializable, Comparable<Phone> {
         if (number.length() == 8) {
             return String.format("+%s %s %s-%s",
                     countryCode,
-                            areaCode,
-                            number.substring(0,4),
-                            number.substring(4));
+                    areaCode,
+                    number.substring(0, 4),
+                    number.substring(4));
         } else {
             return String.format("+%s %s %s-%s",
                     countryCode,
-                            areaCode,
-                            number.substring(0,5),
-                            number.substring(5));
+                    areaCode,
+                    number.substring(0, 5),
+                    number.substring(5));
         }
     }
 
