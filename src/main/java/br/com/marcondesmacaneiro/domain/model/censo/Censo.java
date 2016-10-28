@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.hateoas.core.Relation;
 
 /**
@@ -45,12 +46,12 @@ public class Censo implements Serializable, Persistable<Long>, Identifiable<Long
     @Min(1000)
     @Max(10000)
     private Integer coletor;
-    
+
     @NotNull
     @Size(min = 1, max = 400)
     @Column(nullable = false, length = 400)
     private String dados;
-    
+
     @JsonIgnore
     @CreatedDate
     @Column(nullable = false)
@@ -79,5 +80,9 @@ public class Censo implements Serializable, Persistable<Long>, Identifiable<Long
 
     public static Censo of(Integer coletor, String dados) {
         return new Censo(coletor, dados);
+    }
+
+    public static Specification<Censo> coletorEqualsTo(Integer coletor) {
+        return (root, query, builder) -> builder.equal(root.get(Censo_.coletor), coletor);
     }
 }
