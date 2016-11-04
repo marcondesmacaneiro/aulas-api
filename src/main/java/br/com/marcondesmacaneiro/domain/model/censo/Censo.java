@@ -43,8 +43,6 @@ public class Censo implements Serializable, Persistable<Long>, Identifiable<Long
 
     @NotNull
     @Column(nullable = false)
-    @Min(1000)
-    @Max(100000)
     private Integer coletor;
 
     @NotNull
