@@ -39,6 +39,12 @@ public class CensoRestController {
     @Autowired
     private PagedResourcesAssembler<Censo> pagedResourcesAssembler;
 
+    @RequestMapping(method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    public ResponseEntity<List<Censo>> findAll() {
+        return ok(service.findAll());
+    }
+
     @RequestMapping(method = GET, value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
     public ResponseEntity<List<Censo>> findAll(@PathVariable Integer id) {
