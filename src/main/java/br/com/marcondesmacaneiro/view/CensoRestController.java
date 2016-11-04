@@ -56,11 +56,11 @@ public class CensoRestController {
 
     @RequestMapping(method = POST, consumes = APPLICATION_JSON_VALUE)
     @CrossOrigin
-    public ResponseEntity<Void> gravar(@Valid @RequestBody Censo censo) {
+    public ResponseEntity<Censo> gravar(@Valid @RequestBody Censo censo) {
 
         censo = service.save(censo);
 
-        return noContent().build();
+        return ok(censo);
     }
 
 }
