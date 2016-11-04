@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -31,6 +32,14 @@ public class CensoService {
         return repository.findAll(Specifications.where(Censo.coletorEqualsTo(id)));
     }
 
-    
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Censo save(Censo censo) {
+        return repository.save(censo);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void delete(Censo censo) {
+        repository.delete(censo);
+    }
 
 }
