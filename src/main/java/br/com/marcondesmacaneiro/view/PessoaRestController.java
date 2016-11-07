@@ -94,14 +94,14 @@ public class PessoaRestController {
 
     @RequestMapping(method = DELETE, value = "/{id}")
     @CrossOrigin
-    public ResponseEntity<Pessoa> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
 
         Pessoa pessoa = service.findOne(id)
                 .orElseThrow(EntityAreadyExistException.entityAreadyExist("Pessoa não existe!"));
 
         service.delete(pessoa);
 
-        return ok(pessoa);
+        return noContent().build();
     }
 
     static @Data
