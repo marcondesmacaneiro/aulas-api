@@ -78,7 +78,6 @@ public class Pessoa implements Serializable, Persistable<Long>, Identifiable<Lon
         this.phone = phone;
     }
 
-    @JsonIgnore
     @Override
     public Long getId() {
         return id;
