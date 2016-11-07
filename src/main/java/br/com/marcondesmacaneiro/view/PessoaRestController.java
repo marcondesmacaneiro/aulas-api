@@ -66,19 +66,19 @@ public class PessoaRestController {
 
     @RequestMapping(method = POST, consumes = APPLICATION_JSON_VALUE)
     @CrossOrigin
-        public ResponseEntity<Void> gravar(@Valid @RequestBody Pessoa pessoa) {
+        public ResponseEntity<Pessoa> gravar(@Valid @RequestBody Pessoa pessoa) {
 
 //        Pessoa existentPessoa = service.findByEmail(pessoa.getMail())
 //                .orElseThrow(EntityAreadyExistException.entityAreadyExist("Pessoa já existe!"));
 
         pessoa = service.save(pessoa);
 
-        return noContent().build();
+        return ok(pessoa);
     }
 
     @RequestMapping(method = PATCH, value = "/{id}", consumes = APPLICATION_JSON_VALUE)
     @CrossOrigin
-    public ResponseEntity<Void> edit(@PathVariable Long id,
+    public ResponseEntity<Pessoa> edit(@PathVariable Long id,
             @Valid @RequestBody PessoaPatchInput input,
             HttpServletRequest request) {
 
@@ -89,19 +89,19 @@ public class PessoaRestController {
 
         service.save(pessoa);
 
-        return noContent().build();
+        return ok(pessoa);
     }
 
     @RequestMapping(method = DELETE, value = "/{id}")
     @CrossOrigin
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Pessoa> delete(@PathVariable Long id) {
 
         Pessoa pessoa = service.findOne(id)
                 .orElseThrow(EntityAreadyExistException.entityAreadyExist("Pessoa não existe!"));
 
         service.delete(pessoa);
 
-        return noContent().build();
+        return ok(pessoa);
     }
 
     static @Data
